@@ -2,20 +2,20 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 
 
-
-class Application:
+class Application(object):
 
     def __init__(self, browser, base_url):
-        if browser == "firefox":
+        if browser == 'firefox':
             self.wd = webdriver.Firefox()
-        elif browser == "chrome":
+        elif browser == 'chrome':
             self.wd = webdriver.Chrome()
-        elif browser == "ie":
+        elif browser == 'ie':
             self.wd = webdriver.Ie()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
-        self.wd.implicitly_wait(0.1)
+        self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
+
         self.base_url = base_url
 
     def is_valid(self):
@@ -27,8 +27,7 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
-        if not (wd.current_url.endswith(self.base_url)):
-            wd.get(self.base_url)
+        wd.get(self.base_url)
 
     def destroy(self):
         self.wd.quit()
