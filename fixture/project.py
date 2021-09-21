@@ -35,7 +35,7 @@ class ProjectHelper:
         for element in wd.find_elements_by_xpath("//td/a[contains(@href,'manage_proj_edit_page.php?project_id=')]"):
             text = element.text
             id = element.get_attribute("href").replace(
-                'http://localhost/mantisbt/manage_proj_edit_page.php?project_id=',
+                self.app.base_url + '/manage_proj_edit_page.php?project_id=',
                 ''
             )
             self.project_cache.append(Project(name=text, id=id))
@@ -52,4 +52,4 @@ class ProjectHelper:
 
     def select_project_by_id(self, id):
         wd = self.app.wd
-        wd.get("http://localhost/mantisbt/manage_proj_edit_page.php?project_id="+id)
+        wd.get(self.app.base_url + "/manage_proj_edit_page.php?project_id="+id)

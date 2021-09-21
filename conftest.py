@@ -28,6 +28,10 @@ def app(request):
     return fixture
 
 @pytest.fixture(scope="session", autouse=True)
+def configure_server(request):
+    pass
+
+@pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
         fixture.session.ensure_logout()
