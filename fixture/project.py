@@ -29,7 +29,6 @@ class ProjectHelper:
 
     def get_project_list(self):
         wd = self.app.wd
-
         self.open_project_page()
         self.project_cache = []
         for element in wd.find_elements_by_xpath("//td/a[contains(@href,'manage_proj_edit_page.php?project_id=')]"):
@@ -52,4 +51,5 @@ class ProjectHelper:
 
     def select_project_by_id(self, id):
         wd = self.app.wd
+        id = str(id)
         wd.get(self.app.base_url + "/manage_proj_edit_page.php?project_id="+id)
